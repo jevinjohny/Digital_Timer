@@ -1,0 +1,12 @@
+this is the ignore file created by vscode
+.generated_files/
+build/
+dist/
+Makefile*
+Package-*
+private/
+_build/
+!cmake/**/user.cmake
+cmake/**/.generated/*
+cmake/**/CMake*
+out/
