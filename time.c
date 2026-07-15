@@ -5,6 +5,9 @@
 #include "matrix_keypad.h"
 #include <xc.h>
 
+extern volatile unsigned int presstime;
+
+
 unsigned int val = 0;
 unsigned char clock_reg[3] = {0};
 unsigned char calender_reg[4] = {0};
@@ -13,28 +16,28 @@ unsigned char date[11];
 
 void get_date(void)
 {
-	calender_reg[0] = read_ds1307(YEAR_ADDR);
-	calender_reg[1] = read_ds1307(MONTH_ADDR);
-	calender_reg[2] = read_ds1307(DATE_ADDR);
-	calender_reg[3] = read_ds1307(DAY_ADDR);
+    calender_reg[0] = read_ds1307(YEAR_ADDR);
+    calender_reg[1] = read_ds1307(MONTH_ADDR);
+    calender_reg[2] = read_ds1307(DATE_ADDR);
+    calender_reg[3] = read_ds1307(DAY_ADDR);
 
-	date[6] = '2';
-	date[7] = '0';
-	date[8] = '0' + ((calender_reg[0] >> 4) & 0x0F);
-	date[9] = '0' + (calender_reg[0] & 0x0F);
-	date[5] = '-';
-	date[3] = '0' + ((calender_reg[1] >> 4) & 0x0F);
-	date[4] = '0' + (calender_reg[1] & 0x0F);
-	date[2] = '-';
-	date[0] = '0' + ((calender_reg[2] >> 4) & 0x0F);
-	date[1] = '0' + (calender_reg[2] & 0x0F);
-	date[10] = '\0';
+    date[6] = '2';
+    date[7] = '0';
+    date[8] = '0' + ((calender_reg[0] >> 4) & 0x0F);
+    date[9] = '0' + (calender_reg[0] & 0x0F);
+    date[5] = '-';
+    date[3] = '0' + ((calender_reg[1] >> 4) & 0x0F);
+    date[4] = '0' + (calender_reg[1] & 0x0F);
+    date[2] = '-';
+    date[0] = '0' + ((calender_reg[2] >> 4) & 0x0F);
+    date[1] = '0' + (calender_reg[2] & 0x0F);
+    date[10] = '\0';
 }
 
 void display_date(void)
 {
     clcd_print("DATE:", LINE2(0));
-	clcd_print(date, LINE2(5));
+    clcd_print(date, LINE2(5));
 }
 
 // void display_time(void)
@@ -56,7 +59,7 @@ void display_date(void)
 
 void display_time(void)
 {
-    clcd_print((const unsigned char *)"TIME:", LINE1(0));
+    clcd_print((const unsigned char *) "TIME:", LINE1(0));
     clcd_print(time, LINE1(5));
 }
 
@@ -106,11 +109,12 @@ void settime(void)
     unsigned char mode = 0;
 
     CLEAR_DISP_SCREEN;
+
     while (1)
     {
-        unsigned char key = read_switches(LEVEL_CHANGE);
+        unsigned char key = read_switches(STATE_CHANGE);
 
-        if (key == MK_SW3)
+        if (key == MK_SW1)
         {
             mode++;
             if (mode > 2)
@@ -145,10 +149,9 @@ void settime(void)
         {
         case 0:
         {
-            if (key == MK_SW1)
+            if (key == MK_SW3)
             {
-                CLEAR_DISP_SCREEN;
-
+                //                CLEAR_DISP_SCREEN;
                 hr++;
                 if (hr > 23)
                 {
@@ -157,7 +160,7 @@ void settime(void)
             }
             else if (key == MK_SW2)
             {
-                CLEAR_DISP_SCREEN;
+                //                CLEAR_DISP_SCREEN;
                 hr--;
                 if (hr == 255)
                     hr = 23;
@@ -168,7 +171,7 @@ void settime(void)
         {
             if (key == MK_SW1)
             {
-                CLEAR_DISP_SCREEN;
+                //                CLEAR_DISP_SCREEN;
                 min++;
                 if (min > 59)
                 {
@@ -177,7 +180,7 @@ void settime(void)
             }
             else if (key == MK_SW2)
             {
-                CLEAR_DISP_SCREEN;
+                //                CLEAR_DISP_SCREEN;
                 min--;
                 if (min == 255)
                     min = 59;
@@ -188,7 +191,7 @@ void settime(void)
         {
             if (key == MK_SW1)
             {
-                CLEAR_DISP_SCREEN;
+                //                CLEAR_DISP_SCREEN;
                 sec++;
                 if (sec > 59)
                 {
@@ -197,7 +200,7 @@ void settime(void)
             }
             else if (key == MK_SW2)
             {
-                CLEAR_DISP_SCREEN;
+                //                CLEAR_DISP_SCREEN;
                 sec--;
                 if (sec == 255)
                     sec = 59;

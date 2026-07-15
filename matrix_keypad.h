@@ -60,5 +60,6 @@
 void init_matrix_keypad(void);
 unsigned char scan_key(void);
 unsigned char read_switches(unsigned char detection_type);
+unsigned char long_press_and_short_press(void);
 
 #endif

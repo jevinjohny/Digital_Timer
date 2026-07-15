@@ -1,9 +1,9 @@
 #include <xc.h>
 #define LED PORTBbits.RB0 
 
-extern volatile unsigned int presstime;
+extern unsigned int presstime;
 
-unsigned char flag;
+extern unsigned char flag;
 void __interrupt() isr(void)
 {
 
@@ -12,7 +12,12 @@ void __interrupt() isr(void)
     TMR0 = TMR0 + 8;
     if (flag)
     {
-      ++presstime;
+      if (presstime<65535)
+         ++presstime;
+    }
+    else
+    {
+      presstime=0;
     }
     TMR0IF = 0;
   }

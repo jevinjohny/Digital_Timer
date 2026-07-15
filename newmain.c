@@ -31,24 +31,35 @@ void main(void)
     
     while (1)
     {
-        unsigned char key = read_switches(STATE_CHANGE);
-
+        unsigned char key = long_press_and_short_press();
         
         switch(key)
         {
-            case ALL_RELEASED:
+            case NO_EVENT:
             {
                 get_time();
+
                 display_time();
 
                 get_date();
+
                 display_date();
                 
                 break;
             }
-            case MK_SW1:
+            case SW1_SHORT_PRESS:
             {
-                settime();
+                
+                break;
+            }
+            case SW2_SHORT_PRESS:
+            {
+                // CLEAR_DISP_SCREEN;
+                clcd_print((const unsigned char *)"LONG ", LINE1(0));
+                // __delay_ms(1000);
+                // settime();
+
+
                 break;
             }
 

@@ -30,9 +30,9 @@
       <itemPath>matrix_keypad.h</itemPath>
       <itemPath>timer0.c</itemPath>
       <itemPath>timer0.h</itemPath>
-      <itemPath>main.c</itemPath>
       <itemPath>time.h</itemPath>
       <itemPath>time.c</itemPath>
+      <itemPath>newmain.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -75,8 +75,8 @@
         <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>
         <makeUseCleanTarget>false</makeUseCleanTarget>
         <makeCustomizationPreStep></makeCustomizationPreStep>
-        <makeCustomizationPostStepEnabled>false</makeCustomizationPostStepEnabled>
-        <makeCustomizationPostStep></makeCustomizationPostStep>
+        <makeCustomizationPostStepEnabled>true</makeCustomizationPostStepEnabled>
+        <makeCustomizationPostStep>"C:\TinyMultiBootloaderPlus\TinyMultiBootloader+.exe" "$(ImagePath)"</makeCustomizationPostStep>
         <makeCustomizationPutChecksumInUserID>false</makeCustomizationPutChecksumInUserID>
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
@@ -138,7 +138,7 @@
         <property key="checksum-flash-options-widthc" value="2"/>
         <property key="clear-bss" value="true"/>
         <property key="code-model-external" value="wordwrite"/>
-        <property key="code-model-rom" value=""/>
+        <property key="code-model-rom" value="0-3000"/>
         <property key="create-html-files" value="false"/>
         <property key="data-model-ram" value=""/>
         <property key="data-model-size-of-double" value="24"/>
