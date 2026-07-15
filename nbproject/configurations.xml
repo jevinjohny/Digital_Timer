@@ -33,6 +33,7 @@
       <itemPath>time.h</itemPath>
       <itemPath>time.c</itemPath>
       <itemPath>newmain.c</itemPath>
+      <itemPath>menu.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>

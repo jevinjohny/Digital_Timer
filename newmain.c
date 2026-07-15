@@ -22,46 +22,41 @@ void main(void)
     init_matrix_keypad();
 
     init_ds1307();
-  
+
     init_timer0();
 
     GIE = 1;
 
     PEIE = 1;
-    
+
     while (1)
     {
         unsigned char key = long_press_and_short_press();
-        
-        switch(key)
+
+        switch (key)
         {
-            case NO_EVENT:
-            {
-                get_time();
+        case NO_EVENT:
+        {
+            get_time();
 
-                display_time();
+            display_time();
 
-                get_date();
+            get_date();
 
-                display_date();
-                
-                break;
-            }
-            case SW1_SHORT_PRESS:
-            {
-                
-                break;
-            }
-            case SW2_SHORT_PRESS:
-            {
-                // CLEAR_DISP_SCREEN;
-                clcd_print((const unsigned char *)"LONG ", LINE1(0));
-                // __delay_ms(1000);
-                // settime();
+            display_date();
 
-
-                break;
-            }
+            break;
+        }
+        case SW1_SHORT_PRESS:
+        {
+            menu();
+            break;
+        }
+        case SW2_SHORT_PRESS:
+        {
+            menu();
+            break;
+        }
 
         }
     }

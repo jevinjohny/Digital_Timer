@@ -10,32 +10,32 @@ unsigned char prekey = ALL_RELEASED;
 
 unsigned char long_press_and_short_press(void)
 {
-    // if (presstime > 10000)
-    // {
-    //     clcd_print("LONG", LINE1(0));
-    // }
+    if (presstime > 10000)
+    {
+        clcd_print("LONG", LINE1(0));
+    }
 
     static unsigned char onetime = 1;
     static unsigned char longpress = 0;
-    
+
     unsigned char mkey = read_switches(LEVEL_CHANGE);
-    // clcd_putch(onetime + '0', LINE2(14));
-    // clcd_putch(mkey + '0', LINE2(15));
+    clcd_putch(onetime + '0', LINE2(14));
+    clcd_putch(mkey + '0', LINE2(15));
 
     if (mkey != ALL_RELEASED)
     {
         flag = 1;
 
-        prekey=mkey;
-        
+        prekey = mkey;
+
         if (onetime && presstime > 20000)//switch is pressed more than 500ms
         {
             //it is long press
             onetime = 0;
 
-            longpress=1;
+            longpress = 1;
 
-            presstime=0; //or enable this by using a flag for longpress
+            presstime = 0; //or enable this by using a flag for longpress
 
             switch (mkey)
             {
@@ -71,9 +71,9 @@ unsigned char long_press_and_short_press(void)
             case MK_SW8:return SW8_SHORT_PRESS;
             }
         }
-        longpress=0;
+        longpress = 0;
         presstime = 0;
-        prekey=0;
+        prekey = 0;
     }
     return NO_EVENT;
 }
